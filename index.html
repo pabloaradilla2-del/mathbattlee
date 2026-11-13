@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATHBATTLE | Arena Matemática</title>
+<style>
+:root{--bg:#070d25;--panel:#101b45;--panel2:#14265f;--blue:#2458ff;--cyan:#69d8ff;--purple:#a78bfa;--text:#f5f7ff;--muted:#aab7e8;--line:#2b3d7c;--good:#35d39a;--bad:#ff6b83}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#243d9b 0,#0b153b 40%,var(--bg) 75%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 16px;font-weight:800;color:white;background:linear-gradient(100deg,#2458ff,#754dff);transition:.18s}button:hover{filter:brightness(1.14);transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+header{position:sticky;top:0;z-index:5;background:#080f2bea;backdrop-filter:blur(14px);border-bottom:1px solid #26366f;padding:13px max(18px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:1000;letter-spacing:2px;font-size:22px}.brand span{color:var(--cyan)}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:9px 12px}.nav button.active,.nav button:hover{background:#1a2a65;border-color:#3852a5;color:white}
+main{max-width:1180px;margin:auto;padding:28px 18px 70px}.hero{padding:36px 28px;border:1px solid #344da4;border-radius:24px;background:linear-gradient(120deg,#102b89,#172b79 55%,#392b8b);box-shadow:0 22px 70px #0005;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-80px;top:-130px;background:#6cdcff22;filter:blur(4px)}.eyebrow{font-size:12px;letter-spacing:3px;color:#9ce8ff;font-weight:900}.hero h1{font-size:clamp(34px,6vw,66px);line-height:.98;margin:14px 0}.hero p{color:#d4dcff;max-width:620px;line-height:1.6}.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.stat{background:#07143d77;border:1px solid #526bc1;border-radius:14px;padding:12px 16px;min-width:125px}.stat b{display:block;font-size:22px}.stat small{color:#c0ccff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}.card{background:linear-gradient(160deg,#14265b,#0d173c);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px #0002}.card h3{margin:8px 0}.card p{color:var(--muted);line-height:1.5;font-size:14px}.emoji{font-size:27px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:30px 0 12px}.section-title h2{margin:0;font-size:25px}.muted{color:var(--muted)}.pill{display:inline-block;border:1px solid #3d57a3;background:#17285e;padding:5px 10px;border-radius:99px;color:#cbd8ff;font-size:12px;font-weight:800}
+.view{display:none}.view.active{display:block}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.field{display:grid;gap:7px;margin:12px 0}.field label{font-size:13px;color:#c3cffb;font-weight:700}.field input{width:100%;background:#081334;border:1px solid #34477f;color:white;border-radius:10px;padding:12px;outline:none}.field input:focus{border-color:var(--cyan)}.primary{background:linear-gradient(100deg,#2458ff,#754dff)}.secondary{background:#1b2b62;border:1px solid #40569a}.danger{background:#7b2442}.success{background:#146d58}
+.exam-box{max-width:850px;margin:20px auto}.progress{height:9px;background:#071334;border-radius:20px;overflow:hidden;margin:12px 0 20px}.progress div{height:100%;background:linear-gradient(90deg,var(--cyan),#8b7cff);width:0;transition:.2s}.question{font-size:22px;line-height:1.45;margin:18px 0}.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.option{padding:14px;text-align:left;background:#101f4d;border:1px solid #34477f;border-radius:12px;color:white}.option.selected{border-color:var(--cyan);background:#1b397c}.option.correct{border-color:var(--good)}.option.wrong{border-color:var(--bad)}.feedback{padding:12px;border-radius:12px;background:#0a1737;color:#dce5ff;margin-top:14px;line-height:1.5}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;min-width:520px;background:#0d183d}th,td{padding:13px 15px;text-align:left;border-bottom:1px solid #26396f}th{color:#aeeaff;background:#14265a;font-size:12px;text-transform:uppercase;letter-spacing:1px}td{color:#e9edff}tr:last-child td{border-bottom:0}.rank{color:#8fe7ff;font-weight:900}.game-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.game-card{cursor:pointer;transition:.2s}.game-card:hover{border-color:#6c91ff;transform:translateY(-3px)}.game-area{max-width:760px;margin:20px auto}.game-answer{display:flex;gap:9px}.game-answer input{flex:1;min-width:0;background:#081334;border:1px solid #34477f;color:white;border-radius:10px;padding:12px}.notice{background:#3b2e16;border:1px solid #88652b;color:#ffe4a5;border-radius:12px;padding:13px;line-height:1.5;font-size:13px}.result{font-size:42px;font-weight:1000;color:var(--cyan)}footer{text-align:center;color:#7f91c9;font-size:12px;padding:30px 10px}
+@media(max-width:760px){header{align-items:flex-start;flex-direction:column}.grid,.game-grid{grid-template-columns:1fr 1fr}.options{grid-template-columns:1fr}.hero{padding:26px 20px}.section-title{align-items:flex-start;flex-direction:column}}
+@media(max-width:470px){.grid,.game-grid{grid-template-columns:1fr}.nav button{font-size:12px;padding:8px}}
+</style>
+</head>
+<body>
+<header><div class="brand">MATH<span>BATTLE</span></div><nav class="nav">
+<button class="active" data-view="inicio">Inicio</button><button data-view="examen">Examen</button><button data-view="juegos">Minijuegos</button><button data-view="notas">Calificaciones</button>
+</nav></header>
+<main>
+<section id="inicio" class="view active">
+<div class="hero"><div class="eyebrow">BIENVENIDO A LA ARENA</div><h1>DOMINA LAS<br>MATEMÁTICAS.</h1><p>Desafía tu razonamiento con desigualdades y logaritmos. Resuelve, aprende y demuestra lo que sabes.</p>
+<div class="stats"><div class="stat"><b>40 pts</b><small>Examen total</small></div><div class="stat"><b>4 temas</b><small>Contenido completo</small></div><div class="stat"><b>6 juegos</b><small>Entrenamiento</small></div><div class="stat"><b>50 plazas</b><small>Registro local</small></div></div></div>
+<div class="section-title"><h2>Zona de entrenamiento</h2><span class="pill">DIFICULTAD MEDIA-ALTA</span></div>
+<div class="grid">
+<div class="card"><div class="emoji">📐</div><h3>Desigualdades lineales</h3><p>Intervalos, despejes y representación de soluciones.</p></div>
+<div class="card"><div class="emoji">📈</div><h3>Desigualdades cuadráticas</h3><p>Raíces, signos de parábolas e intervalos.</p></div>
+<div class="card"><div class="emoji">➗</div><h3>Desigualdades racionales</h3><p>Puntos críticos, restricciones y tabla de signos.</p></div>
+<div class="card"><div class="emoji">🔣</div><h3>Logaritmos</h3><p>Propiedades, ecuaciones y cambio de base.</p></div>
+<div class="card"><div class="emoji">🏆</div><h3>Examen de 40 puntos</h3><p>20 preguntas aleatorias, 2 puntos cada una. Todos los temas incluidos.</p><button onclick="showView('examen')">Ir al examen</button></div>
+<div class="card"><div class="emoji">🎮</div><h3>Seis minijuegos</h3><p>Practica con retos rápidos antes de rendir.</p><button class="secondary" onclick="showView('juegos')">Jugar ahora</button></div>
+</div></section>
+<section id="examen" class="view">
+<div class="section-title"><h2>Examen general</h2><span class="pill">20 preguntas · 40 puntos</span></div>
+<div class="notice">El examen selecciona 5 preguntas diferentes de cada tema. Cada respuesta correcta vale 2 puntos. Al finalizar podrás registrar tu nombre y resultado.</div>
+<div id="examIntro" class="card exam-box"><h3>¿Listo para el desafío?</h3><p class="muted">No se solicita elegir nivel. La prueba tiene dificultad media-alta e incluye desigualdades lineales, cuadráticas, racionales y logaritmos.</p><p class="notice">Atención: solo se permite un intento por navegador. Al comenzar, el intento queda registrado y no podrás volver a iniciar el examen desde este dispositivo.</p><button id="startExamBtn" onclick="startExam()">Comenzar examen</button><p id="examLockMessage" class="muted"></p></div>
+<div id="examRun" class="card exam-box" hidden><div class="row between"><span class="pill" id="examTopic">Tema</span><b id="examCount">Pregunta 1/20</b></div><div class="progress"><div id="examProgress"></div></div><div class="question" id="examQuestion"></div><div class="options" id="examOptions"></div><div id="examFeedback"></div><div class="row between" style="margin-top:18px"><span class="muted" id="examPoints">0 / 40 puntos</span><button id="nextQuestion" disabled onclick="nextExamQuestion()">Siguiente</button></div></div>
+<div id="examDone" class="card exam-box" hidden><div class="eyebrow">PRUEBA COMPLETADA</div><h2>Tu resultado</h2><div class="result" id="finalScore">0/40</div><p id="finalMessage" class="muted"></p><div class="field"><label for="studentName">Nombre y apellido</label><input id="studentName" maxlength="60" placeholder="Escribe tu nombre completo"></div><button onclick="saveResult()">Guardar calificación</button><p id="saveMessage" class="muted"></p></div>
+</section>
+<section id="juegos" class="view"><div class="section-title"><h2>Minijuegos</h2><span class="pill">6 MODOS DE PRÁCTICA</span></div><p class="muted">Cada juego genera retos de práctica. Los resultados de los juegos no modifican la nota del examen.</p><div class="game-grid" id="gameGrid"></div><div id="gameArea" class="card game-area" hidden></div></section>
+<section id="notas" class="view"><div class="section-title"><h2>Tabla de calificaciones</h2><span class="pill" id="seatCount">0 / 50 alumnos</span></div><div class="notice">Las notas se guardan en este navegador y dispositivo. Para que los 50 alumnos compartan una tabla real y nadie pueda alterar los resultados desde otro dispositivo, se necesita conectar una base de datos y validar las entregas en un servidor. El bloqueo de un solo intento de esta versión funciona en el mismo navegador y dispositivo; no impide que alguien use otro dispositivo o borre los datos del navegador.</div><div class="row between" style="margin:16px 0"><p class="muted">Ordenadas de mayor a menor calificación.</p><button class="secondary" onclick="exportCSV()">Descargar CSV</button></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Alumno</th><th>Calificación</th><th>Fecha</th></tr></thead><tbody id="gradeRows"><tr><td colspan="4" class="muted">Todavía no hay calificaciones.</td></tr></tbody></table></div></section>
+<footer>MATHBATTLE · Aprende, practica y supera tus límites.</footer>
+</main>
+<script>
+const bank = {
+"Desigualdades lineales":[
+["Resuelve: 3x − 7 > 11",["x > 6","x < 6","x > 4","x < 4"],0,"3x > 18, por tanto x > 6."],
+["Resuelve: −2( x − 3) ≤ 8",["x ≤ −1","x ≥ −1","x ≤ 7","x ≥ 7"],1,"−2x + 6 ≤ 8; −2x ≤ 2. Al dividir por −2 cambia el signo: x ≥ −1."],
+["¿Cuál es la solución de 5 − 3x < 14?",["x < −3","x > −3","x < 3","x > 3"],1,"−3x < 9; al dividir por −3 se invierte el signo: x > −3."],
+["Resuelve: (2x + 1)/3 ≥ 5",["x ≥ 7","x ≤ 7","x ≥ 8","x ≤ 8"],0,"2x + 1 ≥ 15; 2x ≥ 14; x ≥ 7."],
+["Resuelve: 4 − 2(3x + 1) > 10",["x < −4/3","x > −4/3","x < 4/3","x > 4/3"],0,"2 − 6x > 10; −6x > 8; x < −4/3."],
+["Si 7x − 9 ≤ 2x + 6, entonces:",["x ≤ 3","x ≥ 3","x ≤ −3","x ≥ −3"],0,"5x ≤ 15, así que x ≤ 3."],
+["Resuelve: (x − 4)/2 < (x + 2)/3",["x < 14","x > 14","x < −14","x > −14"],1,"3x − 12 < 2x + 4; x > 16. (Corrección: x > 16)."],
+["¿Qué intervalo representa x ≤ 2?",["(−∞,2)","(−∞,2]","[2,∞)","(2,∞)"],1,"El 2 está incluido: (−∞, 2]."]
+],
+"Desigualdades cuadráticas":[
+["Resuelve: x² − 9 > 0",["(−3,3)","(−∞,−3) ∪ (3,∞)","[−3,3]","(−∞,3)"],1,"El producto (x−3)(x+3) es positivo fuera de las raíces."],
+["Resuelve: x² − 5x + 6 ≤ 0",["(−∞,2] ∪ [3,∞)","[2,3]","(2,3)","(−∞,2)"],1,"Las raíces son 2 y 3; la parábola abre hacia arriba, así que es ≤0 entre ellas."],
+["Resuelve: −x² + 4 ≥ 0",["(−∞,−2] ∪ [2,∞)","[−2,2]","(−2,2)","(−∞,2]"],1,"Equivale a x² ≤ 4; solución [−2,2]."],
+["¿Para qué valores x² + x − 6 < 0?",["(−3,2)","(−∞,−3) ∪ (2,∞)","[−3,2]","(−2,3)"],0,"(x+3)(x−2) es negativo entre las raíces: (−3,2)."],
+["Resuelve: x² − 4x + 4 ≥ 0",["Solo x=2","Todos los reales","x > 2","x < 2"],1,"(x−2)² siempre es mayor o igual que cero."],
+["Resuelve: 2x² − 8x < 0",["(−∞,0)","(0,4)","(−4,0)","(4,∞)"],1,"2x(x−4)<0; el producto es negativo entre 0 y 4."],
+["¿Cuál es la solución de x² + 2x + 1 ≤ 0?",["x = −1","Todos los reales","x ≠ −1","Ninguna"],0,"(x+1)² solo vale cero cuando x=−1."],
+["Resuelve: x² − 16 ≥ 0",["[−4,4]","(−∞,−4] ∪ [4,∞)","(−4,4)","Todos los reales"],1,"(x−4)(x+4) es no negativo fuera de las raíces, incluyéndolas."]
+],
+"Desigualdades racionales":[
+["Resuelve: (x−2)/(x+1) > 0",["(−1,2)","(−∞,−1) ∪ (2,∞)","[−1,2]","(−∞,2)"],1,"Puntos críticos −1 y 2. La fracción es positiva en los intervalos exteriores; x=−1 se excluye."],
+["Resuelve: (x+3)/(x−4) ≤ 0",["(−∞,−3] ∪ (4,∞)","[−3,4)","(−3,4)","(−∞,4)"],1,"La fracción es no positiva entre −3 y 4; −3 se incluye y 4 se excluye."],
+["Resuelve: (2x−6)/(x+2) ≥ 0",["(−2,3]","[−2,3]","(−∞,−2) ∪ [3,∞)","(−2,∞)"],2,"Puntos críticos −2 y 3. La solución es (−∞,−2) ∪ [3,∞)."],
+["¿Qué valor debe excluirse del dominio de (x+1)/(x−5)?",["−1","0","1","5"],3,"El denominador no puede ser cero: x ≠ 5."],
+["Resuelve: (x−1)/(x+3) < 0",["(−3,1)","(−∞,−3) ∪ (1,∞)","[−3,1]","(−3,∞)"],0,"La fracción es negativa entre −3 y 1; ambos extremos se excluyen."],
+["Resuelve: (x+2)/(x−1) ≥ 0",["(−2,1)","(−∞,−2] ∪ (1,∞)","[−2,1)","(−∞,1)"],1,"Puntos críticos −2 y 1. Se incluye −2 y se excluye 1."],
+["Resuelve: (x−5)/(x+4) ≤ 0",["(−∞,−4) ∪ [5,∞)","(−4,5]","[−4,5]","(−4,∞)"],1,"Es no positiva entre −4 y 5; −4 no pertenece al dominio y 5 sí."],
+["Para (x²−9)/(x−3), ¿qué valor está excluido?",["−3","0","3","9"],2,"Aunque se simplifique, la expresión original no está definida en x=3."]
+],
+"Logaritmos":[
+["Calcula: log₂(32)",["4","5","6","8"],1,"2⁵=32, por eso log₂(32)=5."],
+["Calcula: log₃(1/9)",["−2","−1","2","3"],0,"3⁻²=1/9."],
+["Si log₅(x)=3, ¿cuánto vale x?",["15","25","125","625"],2,"x=5³=125."],
+["Desarrolla: log₂(8x)",["log₂8 − log₂x","log₂8 + log₂x","8log₂x","log₂(8+x)"],1,"La propiedad del producto convierte el logaritmo en suma."],
+["Calcula: log₁₀(1000)",["2","3","10","100"],1,"10³=1000."],
+["Resuelve: log₂(x−1)=3",["7","8","9","10"],1,"x−1=2³=8, entonces x=9. (La opción correcta es 9)."],
+["¿Cuál es la condición de existencia de log₄(x−6)?",["x < 6","x ≤ 6","x > 6","x ≠ 6"],2,"El argumento debe ser positivo: x−6>0."],
+["Calcula: log₇(49) + log₇(7)",["1","2","3","4"],2,"2+1=3."]
+]
+};
+bank["Desigualdades lineales"][6][1]=["x < 16","x > 16","x < −16","x > −16"];bank["Desigualdades lineales"][6][2]=0;
+bank["Logaritmos"][5][1]=["7","8","9","10"];bank["Logaritmos"][5][2]=2;
+const topics=Object.keys(bank);let exam=[],index=0,score=0,selected=null,finished=false;
+const ATTEMPT_KEY='mb_exam_attempt_v1';
+function examAttempt(){try{return JSON.parse(localStorage.getItem(ATTEMPT_KEY)||'null')}catch(e){return null}}
+function lockExamUI(){const attempt=examAttempt();if(attempt){const btn=document.getElementById('startExamBtn');if(btn)btn.disabled=true;const msg=document.getElementById('examLockMessage');if(msg)msg.textContent=attempt.status==='completed'?'Este navegador ya registró un intento. No se puede repetir el examen.':'Este examen ya fue iniciado en este navegador. No se puede reiniciar ni repetir.';const intro=document.getElementById('examIntro');if(intro)intro.querySelector('h3').textContent='Intento ya utilizado';}}
+window.addEventListener('DOMContentLoaded',lockExamUI);
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='notas')renderGrades();if(id==='examen')lockExamUI();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function startExam(){if(examAttempt()){lockExamUI();return}localStorage.setItem(ATTEMPT_KEY,JSON.stringify({status:'in_progress',startedAt:new Date().toISOString()}));exam=[];topics.forEach(t=>shuffle(bank[t]).slice(0,5).forEach(q=>exam.push({topic:t,q})));exam=shuffle(exam);index=0;score=0;selected=null;finished=false;document.getElementById('examIntro').hidden=true;document.getElementById('examDone').hidden=true;document.getElementById('examRun').hidden=false;renderQuestion();}
+function renderQuestion(){let item=exam[index];selected=null;document.getElementById('examTopic').textContent=item.topic;document.getElementById('examCount').textContent=`Pregunta ${index+1}/20`;document.getElementById('examProgress').style.width=((index)/20*100)+'%';document.getElementById('examQuestion').textContent=item.q[0];document.getElementById('examFeedback').innerHTML='';document.getElementById('examPoints').textContent=`${score} / 40 puntos`;document.getElementById('nextQuestion').disabled=true;document.getElementById('nextQuestion').textContent=index===19?'Ver resultado':'Siguiente';document.getElementById('examOptions').innerHTML=item.q[1].map((o,i)=>`<button class="option" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');}
+function chooseAnswer(i){if(selected!==null)return;selected=i;let item=exam[index].q,ok=i===item[2];if(ok)score+=2;document.querySelectorAll('#examOptions button').forEach((b,j)=>{b.disabled=true;if(j===item[2])b.classList.add('correct');else if(j===i)b.classList.add('wrong')});document.getElementById('examFeedback').innerHTML=`<div class="feedback">${ok?'✓ ¡Correcto! +2 puntos.':'✕ No es correcto.'} ${item[3]}</div>`;document.getElementById('examPoints').textContent=`${score} / 40 puntos`;document.getElementById('nextQuestion').disabled=false;}
+function nextExamQuestion(){if(index<19){index++;renderQuestion()}else{localStorage.setItem(ATTEMPT_KEY,JSON.stringify({status:'completed',score:score,completedAt:new Date().toISOString()}));document.getElementById('examRun').hidden=true;document.getElementById('examDone').hidden=false;document.getElementById('finalScore').textContent=score+'/40';document.getElementById('finalMessage').textContent=score>=34?'¡Excelente dominio!':score>=24?'Buen trabajo. Sigue practicando.':'La práctica te ayudará a mejorar.';}}
+function getGrades(){try{return JSON.parse(localStorage.getItem('mb_grades')||'[]')}catch(e){return []}}
+function saveResult(){let attempt=examAttempt();if(!attempt||attempt.status!=='completed'){document.getElementById('saveMessage').textContent='No hay un intento completado para registrar.';return}let name=document.getElementById('studentName').value.trim();let msg=document.getElementById('saveMessage');if(!name){msg.textContent='Escribe tu nombre completo.';return}let grades=getGrades();if(grades.length>=50){msg.textContent='La tabla ya alcanzó los 50 registros.';return}if(grades.some(g=>g.name.toLowerCase()===name.toLowerCase())){msg.textContent='Ese nombre ya tiene una entrega registrada.';return}grades.push({name,score,date:new Date().toLocaleDateString('es-BO')});localStorage.setItem('mb_grades',JSON.stringify(grades));msg.textContent='¡Calificación guardada!';document.querySelector('#examDone button').disabled=true;renderGrades();}
+function renderGrades(){let grades=getGrades().sort((a,b)=>b.score-a.score);document.getElementById('seatCount').textContent=grades.length+' / 50 alumnos';document.getElementById('gradeRows').innerHTML=grades.length?grades.map((g,i)=>`<tr><td class="rank">${i+1}</td><td>${escapeHtml(g.name)}</td><td><b>${g.score}/40</b></td><td>${g.date}</td></tr>`).join(''):'<tr><td colspan="4" class="muted">Todavía no hay calificaciones.</td></tr>';}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function exportCSV(){let rows=[['Posición','Alumno','Nota','Fecha'],...getGrades().sort((a,b)=>b.score-a.score).map((g,i)=>[i+1,g.name,g.score+'/40',g.date])];let csv=rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(';')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='calificaciones-mathbattle.csv';a.click();URL.revokeObjectURL(a.href);}
+const games=[
+['⚡','Duelo matemático','Elige la respuesta correcta en una ronda rápida.','choice'],
+['🧩','Rompecabezas','Encuentra el valor que completa la ecuación.','input'],
+['✅','Verdadero o falso','Decide si la afirmación matemática es correcta.','choice'],
+['⏱️','Carrera contra el tiempo','Resuelve tantos retos como puedas en 45 segundos.','timer'],
+['🔣','Desafío logarítmico','Entrena propiedades y valores de logaritmos.','choice'],
+['📊','Zona de desigualdades','Identifica el intervalo solución.','choice']
+];let gameScore=0,gameQ=0,gameMode='',timerId=null,seconds=45;
+function renderGames(){document.getElementById('gameGrid').innerHTML=games.map((g,i)=>`<div class="card game-card" onclick="launchGame(${i})"><div class="emoji">${g[0]}</div><h3>${g[1]}</h3><p>${g[2]}</p><span class="pill">JUGAR</span></div>`).join('');}
+renderGames();
+const gameQuestions=[
+()=>({q:'Resuelve: 4x−5=19',opts:['x=5','x=6','x=7','x=8'],a:1,why:'4x=24, entonces x=6.'}),
+()=>({q:'¿Cuánto vale log₃(81)?',opts:['2','3','4','5'],a:2,why:'3⁴=81.'}),
+()=>({q:'Solución de x²−9<0:',opts:['(−∞,−3)∪(3,∞)','(−3,3)','[−3,3]','(3,∞)'],a:1,why:'La expresión es negativa entre las raíces.'}),
+()=>({q:'Dominio de 1/(x−7):',opts:['Todos los reales','x≠7','x>7','x<7'],a:1,why:'El denominador no puede ser cero.'}),
+()=>({q:'log₂(8)+log₂(4)=',opts:['3','4','5','6'],a:2,why:'3+2=5.'}),
+()=>({q:'Si −3x>12, entonces:',opts:['x>−4','x<−4','x>4','x<4'],a:1,why:'Al dividir por −3 se invierte el signo.'}),
+()=>({q:'¿Es verdadera? (x−2)²≥0 para todo real x.',opts:['Verdadero','Falso'],a:0,why:'Todo cuadrado es no negativo.'}),
+()=>({q:'log₅(25)=',opts:['1','2','3','5'],a:1,why:'5²=25.'})
+];
+function launchGame(i){clearInterval(timerId);gameMode=games[i][3];gameScore=0;gameQ=0;seconds=45;let area=document.getElementById('gameArea');area.hidden=false;area.innerHTML=`<div class="row between"><span class="pill">${games[i][1]}</span><button class="secondary" onclick="closeGame()">Cerrar</button></div><h2 id="gameTitle">Reto 1</h2><p class="muted" id="gameTimer">${gameMode==='timer'?'Tiempo: 45 s':'Practica sin presión de tiempo'}</p><div class="question" id="gameQuestion"></div><div class="options" id="gameOptions"></div><div id="gameFeedback"></div><div class="row between" style="margin-top:16px"><b id="gameScore">Puntos: 0</b><button id="gameNext" disabled onclick="nextGame()">Siguiente reto</button></div>`;nextGameQuestion();if(gameMode==='timer'){timerId=setInterval(()=>{seconds--;document.getElementById('gameTimer').textContent='Tiempo: '+seconds+' s';if(seconds<=0){clearInterval(timerId);endGame()}},1000)}}
+function nextGameQuestion(){let q=shuffle(gameQuestions)[0]();window.currentGameQ=q;document.getElementById('gameTitle').textContent='Reto '+(gameQ+1);document.getElementById('gameQuestion').textContent=q.q;document.getElementById('gameOptions').innerHTML=q.opts.map((o,i)=>`<button class="option" onclick="answerGame(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');document.getElementById('gameFeedback').innerHTML='';document.getElementById('gameNext').disabled=true;document.getElementById('gameScore').textContent='Puntos: '+gameScore;}
+function answerGame(i){let q=window.currentGameQ;document.querySelectorAll('#gameOptions button').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(i===j)b.classList.add('wrong')});if(i===q.a)gameScore++;document.getElementById('gameFeedback').innerHTML=`<div class="feedback">${i===q.a?'¡Correcto!':'Inténtalo de nuevo.'} ${q.why}</div>`;document.getElementById('gameScore').textContent='Puntos: '+gameScore;document.getElementById('gameNext').disabled=false;}
+function nextGame(){gameQ++;if(gameMode==='timer'&&seconds<=0){endGame();return}nextGameQuestion();}
+function endGame(){clearInterval(timerId);document.getElementById('gameArea').innerHTML=`<div class="eyebrow">RONDA TERMINADA</div><h2>¡Buen esfuerzo!</h2><div class="result">${gameScore} pts</div><p class="muted">Respuestas correctas en esta ronda.</p><button onclick="closeGame()">Volver a los juegos</button>`;}
+function closeGame(){clearInterval(timerId);document.getElementById('gameArea').hidden=true;}
+</script>
+</body></html>
